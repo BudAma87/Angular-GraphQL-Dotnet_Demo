@@ -1,0 +1,10 @@
+<h2>Available Phones</h2>
+
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<div *ngFor="let phone of phones" style="border: 1px solid #ccc; padding: 10px; margin: 10px;">
+  <h3>{{ phone.name }}</h3>
+  <p>Price: ${{ phone.price }}</p>
+  <button (click)="placeOrder(phone.id)">Order Now</button>
+</div>
+

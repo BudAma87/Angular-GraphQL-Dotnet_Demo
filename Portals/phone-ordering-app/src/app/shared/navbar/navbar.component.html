@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+  <span>📱 Phone Order App</span>
+  <span class="spacer"></span>
+  <!-- <span>👤 Welcome, </span>
+  <button mat-button (click)="logout()">Logout</button> -->
+  <ng-container *ngIf="username">
+    <span>👤 Welcome, {{ username }}</span>
+    <button mat-button (click)="logout()">Logout</button>
+  </ng-container>
+</mat-toolbar>
+
