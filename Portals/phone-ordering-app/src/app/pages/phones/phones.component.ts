@@ -5,8 +5,8 @@ import { GET_PHONES, PLACE_ORDER } from './phones.graphql';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  standalone: true,
   selector: 'app-phones',
+  standalone: true, 
   imports: [CommonModule, RouterModule],
   templateUrl: './phones.component.html',
 })

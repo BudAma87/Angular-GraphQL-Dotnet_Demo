@@ -63,7 +63,8 @@ using (var scope = app.Services.CreateScope())
         db.Phones.Add(new Phone { Name = "iPhone 14", Price = 3500 });
         db.Phones.Add(new Phone { Name = "iPhone 15", Price = 4500 });
         db.Phones.Add(new Phone { Name = "iPhone 16", Price = 5500 });
-        db.Phones.Add(new Phone { Name = "iPhone 16", Price = 5500 });
+        db.Phones.Add(new Phone { Name = "Galaxy S23", Price = 3500 });
+        db.Phones.Add(new Phone { Name = "Galaxy S24", Price = 4500 });
         db.SaveChanges();
     }
 }

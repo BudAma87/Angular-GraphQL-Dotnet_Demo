@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Apollo } from 'apollo-angular';
+import { Component, inject } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { LOGIN_MUTATION } from './login.graphql';
+import { Apollo } from 'apollo-angular';
 
 @Component({
   selector: 'app-login',
@@ -28,14 +29,15 @@ import { LOGIN_MUTATION } from './login.graphql';
   ]
 })
 export class LoginComponent {
+  private apollo = inject(Apollo); // ✅ Correct way with v10+
   form: FormGroup;
   error: string | null = null;
-
+  
   constructor(
-    private apollo: Apollo,
     private fb: FormBuilder,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    
   ) {
     this.form = this.fb.group({
       username: ['', Validators.required],

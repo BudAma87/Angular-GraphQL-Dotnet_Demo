@@ -4,7 +4,7 @@ import { PhonesComponent } from './pages/phones/phones.component';
 import { authGuard } from '../guards/auth.guard';
 
 export const routes: Routes = [
-    { path: 'login', component: LoginComponent },
-    { path: 'phones', component: PhonesComponent, canActivate: [authGuard] },
-    { path: '', redirectTo: 'login', pathMatch: 'full' }
-  ];
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'phones', component: PhonesComponent }
+];

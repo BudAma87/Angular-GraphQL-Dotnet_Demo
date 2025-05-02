@@ -2,6 +2,7 @@
   <h2>Login</h2>
 
   <form [formGroup]="form" (ngSubmit)="login()">
+    
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Username</mat-label>
       <input matInput formControlName="username" required>
@@ -15,5 +16,6 @@
     <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
       Login
     </button>
-  </form>
+
+</form>
 </mat-card>
