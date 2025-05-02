@@ -1,26 +1,37 @@
 import { Component } from '@angular/core';
-import { RouterModule, Router } from '@angular/router';
+import { AuthService } from '../../utils/auth.service';
 import { CommonModule } from '@angular/common';
-import { getUsernameFromToken } from '../../utils/auth.utils';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  standalone: true,
   selector: 'app-navbar',
-  imports: [CommonModule, RouterModule],
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  standalone: true,
+  imports: [CommonModule, MatToolbarModule, MatButtonModule]
+  
 })
 export class NavbarComponent {
-  username = getUsernameFromToken();
-
-  constructor(private router: Router) {}
-
-  get isLoggedIn(): boolean {
-    return !!this.username;
+  username: string | null = null;
+ 
+  constructor(private authService: AuthService) {
+    console.log(authService);
+   
+    this.username = this.authService.getUsername();
   }
+  // token: string | null = localStorage.getItem('token');
+  // if (token: string) {
+  //   try {
+  //     const payload = JSON.parse(atob(token.split('.')[1]));
+  //     console.log("TEST",payload);
+  //     this.username = payload?.name || payload?.sub || null;
+  //   } catch (e) {
+  //     console.error('Failed to decode token:', e);
+  //   }
+  // }
 
-  logout(): void {
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
+  logout() {
+    this.authService.logout();
+    location.reload(); // or use router navigation
   }
 }

@@ -56,6 +56,7 @@ export class LoginComponent {
         const token = result.data?.login;
         localStorage.setItem('token', token);
         this.snackBar.open('Login successful!', 'Close', { duration: 2000 });
+       
         this.router.navigate(['/phones']);
       },
       error: (err) => {

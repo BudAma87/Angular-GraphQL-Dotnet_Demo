@@ -1,17 +1,33 @@
 import { Injectable } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import { LOGIN_MUTATION } from '../pages/login/login.graphql'; // Adjust the import path as necessary
+import { jwtDecode } from 'jwt-decode';
 
-@Injectable({
-  providedIn: 'root'
-})
+export interface DecodedToken {
+  name?: string;
+  sub?: string;
+  exp?: number;
+  [key: string]: any;
+}
+
+@Injectable({ providedIn: 'root' })
 export class AuthService {
-  constructor(private apollo: Apollo) {}
+  getUsername(): string | null {
+    const token = localStorage.getItem('token');
+    if (!token) return null;
 
-  login(username: string, password: string) {
-    return this.apollo.mutate({
-      mutation: LOGIN_MUTATION,
-      variables: { username, password }
-    });
+    try {
+      const decoded = jwtDecode<DecodedToken>(token);
+      return decoded.name || decoded.sub || null;
+    } catch (err) {
+      console.error('Token decode error:', err);
+      return null;
+    }
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+  }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
   }
 }

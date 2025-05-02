@@ -1,10 +1,11 @@
-<nav>
-  <div class="logo">📱 Phone Shop</div>
+<mat-toolbar color="primary">
+  <span>📱 Phone Order App</span>
+  <span class="spacer"></span>
+  <!-- <span>👤 Welcome, </span>
+  <button mat-button (click)="logout()">Logout</button> -->
+  <ng-container *ngIf="username">
+    <span>👤 Welcome, {{ username }}</span>
+    <button mat-button (click)="logout()">Logout</button>
+  </ng-container>
+</mat-toolbar>
 
-  <div class="nav-links">
-   
-    <span *ngIf="isLoggedIn">Welcome, {{ username }}!</span>
-    <a routerLink="/phones" *ngIf="isLoggedIn">Phones</a>
-    <button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
-  </div>
-</nav>
