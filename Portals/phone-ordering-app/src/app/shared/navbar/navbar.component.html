@@ -1,0 +1,9 @@
+<nav>
+  <div class="logo">📱 Phone Shop</div>
+
+  <div class="nav-links">
+    <span *ngIf="isLoggedIn">Welcome, {{ username }}!</span>
+    <a routerLink="/phones" *ngIf="isLoggedIn">Phones</a>
+    <button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
+  </div>
+</nav>

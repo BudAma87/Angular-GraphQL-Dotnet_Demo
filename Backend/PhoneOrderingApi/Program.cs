@@ -30,6 +30,16 @@ builder.Services.AddSingleton<JwtTokenHelper>();
 builder.Services.AddPooledDbContextFactory<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy => policy
+            .WithOrigins("http://localhost:4200")
+            .AllowAnyHeader()
+            .AllowAnyMethod());
+});
+
+
 builder.Services
     .AddGraphQLServer()
     .AddQueryType<Query>()
@@ -48,11 +58,16 @@ using (var scope = app.Services.CreateScope())
 
     if (!db.Phones.Any())
     {
-        db.Phones.Add(new Phone { Name = "iPhone 15", Price = 1500 });
+        db.Phones.Add(new Phone { Name = "iPhone 12", Price = 1500 });
+        db.Phones.Add(new Phone { Name = "iPhone 13", Price = 2500 });
+        db.Phones.Add(new Phone { Name = "iPhone 14", Price = 3500 });
+        db.Phones.Add(new Phone { Name = "iPhone 15", Price = 4500 });
+        db.Phones.Add(new Phone { Name = "iPhone 16", Price = 5500 });
+        db.Phones.Add(new Phone { Name = "iPhone 16", Price = 5500 });
         db.SaveChanges();
     }
 }
-
+app.UseCors("AllowFrontend");
 // Enable GraphQL endpoint
 app.MapGraphQL();
 
